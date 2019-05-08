@@ -1,1 +1,9 @@
-<h1> Dashboard</h1>
+@extends('layouts.master')
+
+@section('title')
+    'Home'
+@endsection
+
+@section('content')
+    
+@endsection

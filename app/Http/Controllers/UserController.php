@@ -14,10 +14,17 @@ class UserController extends Controller{
     }
 
     public function signup(Request $request){
+        $request->validate([
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'signup_email' => 'required|unique:users,email|email',
+            'signup_password' => 'required|confirmed'
+        ]);
+
         $first_name = $request['first_name'];
         $last_name = $request['last_name'];
-        $email = $request['email'];
-        $password = bcrypt($request['password']);
+        $email = $request['signup_email'];
+        $password = bcrypt($request['signup_password']);
 
         $user = new User();
         $user->first_name = $first_name;
@@ -31,10 +38,14 @@ class UserController extends Controller{
     }
 
     public function signin(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
         if(Auth::attempt(['email' => $request['email'], 'password' => $request['password']]))
             return redirect()->route('dashboard');
         else
-            return redirect()->back();
+            return redirect()->back()->with('msg', 'Incorrect Email or Password');
     }
 
 }
