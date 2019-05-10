@@ -15,10 +15,10 @@
     margin-top : 5px;
 }
 .m-t-10{
-    margin-top : 10px;
+    margin-top : 10px !important;
  }
 .m-t-20{
-    margin-top : 20px;
+    margin-top : 20px !important;
 }
 .m-t-30{
     margin-top : 30px;
@@ -62,10 +62,15 @@
     margin-bottom : 30px;
 }
 
-
-
+body{
+    background-color: #EFF1F3;
+}
+nav {
+    background-color: #272727;
+}
 .create-post{
-    background: #f8f9fa;
+    background: #4a4a4a;
+    border-radius : 9px;
 }
 .create-post form{
     display: block;
@@ -73,4 +78,11 @@
 .create-post button{
     background-color: #e1ecf7;
     float : right;
+}
+.posts {
+    background: white;
+}
+span .date {
+    color : grey;
+    font-size: 12px;
 }
