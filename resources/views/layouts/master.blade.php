@@ -13,5 +13,6 @@
         <div class="content">@yield('content')</div>
     </body>
 
-
+    <script src="{{URL::to('js/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{URL::to('js/custom.js')}}"></script>
 </html>
