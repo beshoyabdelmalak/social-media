@@ -15,43 +15,23 @@
             </form>
         </div>
         <div class=" col-md-6 offset-md-3 posts p-t-15">
-            <div class = "post">
-                <p class="font-italic"> MAX </p>
-                <article>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-                    mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-                    vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-                </article>
-                <div class="info">
-                    at 14:53
-                </div>
-                <div class="interaction">
-                    <a href="#">Like</a> |
-                    <a href="#">Dislike</a> |
-                    <a href="#">Edit</a> |
-                    <a href="#">Delete</a> |
-                </div>
-                <hr>
-            </div>
-            <div class = "post">
-                <p class="font-italic"> MAX </p>
-                <article>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-                    mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-                    vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-                </article>
-                <span class="date">at 14:53 </span>
-                <hr>
-            </div>
-            <div class = "post">
-                <p class="font-italic"> MAX </p>
-                <article>
-                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-                    mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-                    vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
-                </article>
-                <span class="date">at 14:53 </span>
-                <hr>
+            @foreach($posts as $post )
+                <div class = "post">
+                    <p class="font-italic"> {{$post->user->first_name}} </p>
+                    <article>
+                        {{$post->body}}
+                    </article>
+                    <div class="info">
+                        on {{$post->created_at}}
+                    </div>
+                    <div class="interaction">
+                        <a href="#">Like</a> |
+                        <a href="#">Dislike</a> |
+                        <a href="#">Edit</a> |
+                        <a href="#">Delete</a> |
+                    </div>
+                    <hr>
+            @endforeach
             </div>
         </div>
     </div>

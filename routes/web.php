@@ -25,11 +25,16 @@ Route::post('/signin',[
     'as' => 'signin',
 ]);
 Route::get('/dashboard',[
-    'uses' => 'UserController@dashboard',
+    'uses' => 'PostController@dashboard',
     'as' => 'dashboard',
     'middleware' => 'auth'
 ]);
 Route::post('/createpost',[
     'uses' => 'PostController@createPost',
     'as' => 'post.create'
+]);
+Route::get('/logout',[
+    'uses' => 'UserController@logout',
+    'as' => 'logout',
+    'middleware' => 'auth'
 ]);

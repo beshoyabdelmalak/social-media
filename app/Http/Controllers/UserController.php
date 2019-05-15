@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller{
 
-    public function dashboard(){
-        return view('dashboard');
-    }
-
     public function signup(Request $request){
         $request->validate([
             'first_name' => 'required|max:255',
@@ -46,6 +42,11 @@ class UserController extends Controller{
             return redirect()->route('dashboard');
         else
             return redirect()->back()->with('msg', 'Incorrect Email or Password');
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route("home");
     }
 
 }

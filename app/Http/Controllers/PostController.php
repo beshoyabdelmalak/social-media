@@ -29,4 +29,9 @@ class PostController extends Controller{
         }
         return redirect()->route('dashboard')->with(['msg'=> $msg]);
     }
+
+    public function dashboard(){
+        $posts = Post::OrderBy('created_at', 'desc')->get();
+        return view('dashboard',compact('posts'));
+    }
 }
