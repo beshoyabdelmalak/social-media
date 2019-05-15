@@ -31,10 +31,16 @@ Route::get('/dashboard',[
 ]);
 Route::post('/createpost',[
     'uses' => 'PostController@createPost',
-    'as' => 'post.create'
+    'as' => 'post.create',
+    'middleware' => 'auth'
 ]);
 Route::get('/logout',[
     'uses' => 'UserController@logout',
     'as' => 'logout',
+    'middleware' => 'auth'
+]);
+Route::get('/deletePost/{id}',[
+    'uses' => 'PostController@deletePost',
+    'as' => 'deletePost',
     'middleware' => 'auth'
 ]);

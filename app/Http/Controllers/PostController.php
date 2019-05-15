@@ -34,4 +34,15 @@ class PostController extends Controller{
         $posts = Post::OrderBy('created_at', 'desc')->get();
         return view('dashboard',compact('posts'));
     }
+
+    public function deletePost($id){
+        $post = Post::where('id', $id)->first();
+        if($post && Auth::user() == $post->user){
+            $post->delete();
+            return redirect()->back()->with('msg', 'post was deleted successfully');
+        }
+
+        return redirect()->route('dashboard');
+
+    }
 }
