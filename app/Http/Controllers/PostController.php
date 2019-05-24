@@ -60,10 +60,9 @@ class PostController extends Controller{
             $post->body = $request['body'];
             $post->update();
             //return redirect()->back()->with('msg', 'post was deleted successfully');
-
         }
 
-        return response()->json($post);
+        return response()->json(["error"=>"Something went wrong"],422);
 
 
     }
