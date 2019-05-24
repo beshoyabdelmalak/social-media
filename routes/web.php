@@ -24,6 +24,12 @@ Route::post('/signin',[
     'uses' => 'UserController@signin',
     'as' => 'signin',
 ]);
+
+Route::get('/logout',[
+    'uses' => 'UserController@logout',
+    'as' => 'logout',
+    'middleware' => 'auth'
+]);
 Route::get('/dashboard',[
     'uses' => 'PostController@dashboard',
     'as' => 'dashboard',
@@ -34,13 +40,13 @@ Route::post('/createpost',[
     'as' => 'post.create',
     'middleware' => 'auth'
 ]);
-Route::get('/logout',[
-    'uses' => 'UserController@logout',
-    'as' => 'logout',
-    'middleware' => 'auth'
-]);
 Route::get('/deletePost/{id}',[
     'uses' => 'PostController@deletePost',
     'as' => 'deletePost',
+    'middleware' => 'auth'
+]);
+Route::post('/editPost',[
+    'uses' => 'PostController@editPost',
+    'as' => 'editPost',
     'middleware' => 'auth'
 ]);

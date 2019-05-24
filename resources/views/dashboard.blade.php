@@ -29,7 +29,7 @@
                         <a href="#">Dislike</a>
                         @if (Auth::user() == $post->user)
                         |
-                        <a href="#" method = "PUT">Edit</a> |
+                        <a href="#" class ="edit" data-post-id="{{$post->id}}">Edit</a> |
                         <a href="{{route('deletePost', ['id'=> $post->id])}}" >Delete</a> |
                         @endif
                     </div>
@@ -38,4 +38,28 @@
             </div>
         </div>
     </div>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" >Edit Post</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="body" id="body" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        var token = "{{Session::token()}}";
+    </script>
 @endsection

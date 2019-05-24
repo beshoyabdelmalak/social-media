@@ -7,6 +7,7 @@ use http\Env\Response;
 use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
 
 class PostController extends Controller{
@@ -43,6 +44,27 @@ class PostController extends Controller{
         }
 
         return redirect()->route('dashboard');
+
+    }
+    public function editPost(Request $request){
+        $post = Post::where('id', $request['id'])->first();
+        $validator  = Validator::make($request->all(),[
+            "body" => 'required'
+        ]);
+        if( $validator->fails() )
+        {
+            return response()->json($validator->errors(),422);
+        }
+
+        if($post && Auth::user() == $post->user) {
+            $post->body = $request['body'];
+            $post->update();
+            //return redirect()->back()->with('msg', 'post was deleted successfully');
+
+        }
+
+        return response()->json($post);
+
 
     }
 }
