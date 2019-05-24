@@ -40,7 +40,7 @@ Route::post('/createpost',[
     'as' => 'post.create',
     'middleware' => 'auth'
 ]);
-Route::get('/deletePost/{id}',[
+Route::post('/deletePost',[
     'uses' => 'PostController@deletePost',
     'as' => 'deletePost',
     'middleware' => 'auth'

@@ -5,6 +5,8 @@ if ($('#msg')){
 
 var id;
 var body;
+//Editing Post
+//
 //get the modal body
 var modalBody = $('.modal-body').find('#body');
 //after clicking on edit button
@@ -47,4 +49,36 @@ $('.modal-footer').find('button').click(function (){
 $("#modal").on("hidden.bs.modal", function () {
     modalBody.removeClass('is-invalid');
     modalBody.parent().find('.alert').hide();
+});
+
+
+//Deleting Post
+//
+
+$('body').find('.delete').on('click', function (e) {
+    e.preventDefault();
+    //alert('am i here');
+    if (confirm('Are you sure you want to Delete Post ?')) {
+        id = $(this).data('post-id');
+        $.ajax({
+            method: "POST",
+            url: "/deletePost",
+            data: {
+                "_token": token,
+                "id" : id
+            },
+            success: function(response){
+                alert(response['msg']);
+                location.reload();
+            },
+            error: function (response) {
+                if(response.status == 424){
+                    alert(response['error']);
+                }
+            }
+
+        });
+    } else {
+        return false;
+    }
 });

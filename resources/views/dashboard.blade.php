@@ -30,7 +30,7 @@
                         @if (Auth::user() == $post->user)
                         |
                         <a href="#" class ="edit" data-post-id="{{$post->id}}">Edit</a> |
-                        <a href="{{route('deletePost', ['id'=> $post->id])}}" >Delete</a> |
+                        <a href="#" class ="delete" data-post-id="{{$post->id}}">Delete</a> |
                         @endif
                     </div>
                     <hr>

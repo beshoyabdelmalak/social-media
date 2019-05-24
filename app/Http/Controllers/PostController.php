@@ -36,14 +36,14 @@ class PostController extends Controller{
         return view('dashboard',compact('posts'));
     }
 
-    public function deletePost($id){
-        $post = Post::where('id', $id)->first();
+    public function deletePost(Request $request){
+        $post = Post::where('id', $request['id'])->first();
         if($post && Auth::user() == $post->user){
             $post->delete();
-            return redirect()->back()->with('msg', 'post was deleted successfully');
+            return response()->json(["msg"=>"Post deleted successfully"]);
         }
 
-        return redirect()->route('dashboard');
+        return response()->json(["error"=>"Something went wrong"],422);
 
     }
     public function editPost(Request $request){
