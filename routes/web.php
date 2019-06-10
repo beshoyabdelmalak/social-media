@@ -30,6 +30,17 @@ Route::get('/logout',[
     'as' => 'logout',
     'middleware' => 'auth'
 ]);
+
+Route::get('/profile',[
+    'uses' => 'UserController@getAccount',
+    'as' =>'profile',
+    'middleware' => 'auth'
+]);
+Route::post('/update',[
+    'uses' => 'UserController@update',
+    'as' => 'update',
+    'middleware' => 'auth'
+]);
 Route::get('/dashboard',[
     'uses' => 'PostController@dashboard',
     'as' => 'dashboard',

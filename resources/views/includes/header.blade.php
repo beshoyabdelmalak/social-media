@@ -2,7 +2,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{route('dashboard')}}">Home <span class="sr-only">(current)</span></a>
         </li>
         </ul>
 {{--        <form class="form-inline my-2 my-lg-0">--}}
@@ -11,6 +11,7 @@
 {{--        </form>--}}
         <div class="navbar-nav">
             <a class="nav-item nav-link" href="{{route('logout')}}">Logout</a>
+            <a class="nav-item nav-link" href="{{route('profile')}}">Account</a>
         </div>
     </div>
 </nav>

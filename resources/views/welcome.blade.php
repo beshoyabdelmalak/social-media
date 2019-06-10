@@ -25,6 +25,13 @@
                 @enderror
             </div>
             <div class="form-group">
+                <label for="username">Userame</label>
+                <input type="text" class= "form-control @error('username') is-invalid @enderror" name="username" placeholder="John Doe" value="{{Request::old('username')}}">
+                @error('username')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
+            </div>
+            <div class="form-group">
                 <label for="signup_email">Email</label>
                 <input type="text" class= "form-control @error('signup_email') is-invalid @enderror" name="signup_email" placeholder="John@example.com" value="{{Request::old('signup_email')}}">
                 @error('signup_email')
