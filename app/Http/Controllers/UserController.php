@@ -56,7 +56,8 @@ class UserController extends Controller{
 
     public function getAccount(){
         $user = Auth::user();
-        return view('profile', compact("user", $user));
+        $posts = $user->posts;
+        return view('profile', compact("user", "posts"));
     }
 
     public function update(Request $request){
