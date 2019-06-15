@@ -36,11 +36,11 @@ Route::get('/profile',[
     'as' =>'profile',
     'middleware' => 'auth'
 ]);
-//Route::view('/update',[
-//    'uses' => 'UserController@update',
-//    'as' => 'update',
-//    'middleware' => 'auth'
-//]);
+Route::post('/edit',[
+    'uses' => 'UserController@update',
+    'as' => 'edit',
+    'middleware' => 'auth'
+]);
 Route::view('/update', 'edit_profile')->name('update')->middleware('auth');
 Route::get('/dashboard',[
     'uses' => 'PostController@dashboard',

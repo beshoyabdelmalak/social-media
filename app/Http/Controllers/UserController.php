@@ -56,13 +56,28 @@ class UserController extends Controller{
 
     public function getAccount(){
         $user = Auth::user();
-        $posts = $user->posts;
-        return view('profile', compact("user", "posts"));
+        return view('profile', compact("user"));
     }
 
     public function update(Request $request){
+        $user = Auth::user();
+
+        $request->validate([
+            'first_name' => 'max:255',
+            'last_name' => 'max:255',
+            'username' => 'max:255|min:4|unique:users,username,'. $user->id,
+            'email' => 'email|unique:users,email,' . $user->id,
+            'password' => 'confirmed'
+        ]);
+        foreach($request->all() as $key=>$value){
+            if (!empty($value) && $key != '_token'){
+                if ($user->$key != $value){
+                    $user->$key = $value;
+                }
+            }
+
+        }
         if ($request->hasFile('file')){
-            $user = Auth::user();
             if ($user->image != 'default.png'){
                 File::delete(public_path('/uploads/avatars/').$user->image);
             }
@@ -71,9 +86,9 @@ class UserController extends Controller{
             Image::make($image)->resize(300,300)->save(public_path('/uploads/avatars/').$filename);
 
             $user->image = $filename;
-            $user->save();
-
         }
+
+        $user->save();
 
         return redirect()->route('profile', compact('user', $user));
     }
