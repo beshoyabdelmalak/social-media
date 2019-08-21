@@ -26,7 +26,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-content profile-tab" id="myTabContent">
+                <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
@@ -64,24 +64,48 @@
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         @if(count($user->posts) > 0)
                             @foreach($user->posts as $post )
-                                <div class = "post">
-                                    <p class="font-italic"> {{$post->user->first_name}} </p>
-                                    <article>
-                                        {{$post->body}}
-                                    </article>
-                                    <div class="info">
-                                        on {{$post->created_at}}
+                                <div class="content post">
+                                    <div class = "row">
+                                        <div class="col-2 p-r-0">
+                                            <img src="/uploads/avatars/{{Auth::user()->image}}" alt="profile-image" class = 'w-85 rounded-circle'/>
+                                        </div>
+                                        <div class="col-3 p-l-10">
+                                            <p class="font-italic m-t-5"> {{$post->user->username}} </p>
+                                        </div>
                                     </div>
-                                    <div class="interaction">
-                                        <a href="#">Like</a> |
-                                        <a href="#">Dislike</a>
-                                        @if (Auth::user() == $post->user)
-                                            |
-                                            <a href="#" class ="edit" data-post-id="{{$post->id}}">Edit</a> |
-                                            <a href="#" class ="delete" data-post-id="{{$post->id}}">Delete</a> |
-                                        @endif
+                                    <div class="row">
+                                        <div class="col">
+                                            <article>{{$post->body}}</article>
+                                        </div>
                                     </div>
-                                    <hr>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="info">on {{$post->created_at}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2 p-r-0">
+                                            <a href="#">Like</a>
+                                        </div>
+                                        |
+                                        <div class="col-2 p-r-0">
+                                            <a href="#">Dislike</a>
+                                        </div>
+{{--                                        {{$post->user}}--}}
+{{--                                        {{dd(Auth::user())}}--}}
+                                            @if (Auth::user() == $post->user)
+                                                |
+                                                <div class="col-2 p-r-0">
+                                                    <a href="#" class ="edit" data-post-id="{{$post->id}}">Edit</a>
+                                                </div>
+                                                |
+                                                <div class="col-2 p-r-0">
+                                                    <a href="#" class ="delete" data-post-id="{{$post->id}}">Delete</a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <hr>
+                                    </div>
                                 </div>
                             @endforeach
                         @else
@@ -91,11 +115,9 @@
                         @endif
                     </div>
                 </div>
-            </div>
             <div class="col-md-3">
                 <a class="profile-edit-btn btn" href="{{route('update')}}">Edit Profile</a>
             </div>
         </div>
     </div>
-
     @endsection

@@ -65,7 +65,18 @@
 .p-t-15{
     padding-top: 15px;
 }
-
+.p-l-0{
+    padding-left : 0px;
+}
+.p-l-10{
+    pading-left:10px;
+}
+.p-r-0{
+    padding-right: 0px;
+}
+.w-85{
+    width:85%;
+}
 body{
     background-color: #EFF1F3;
 }
