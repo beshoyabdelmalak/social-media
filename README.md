@@ -16,12 +16,11 @@ a simple social network were every user can publish posts which are going to be 
 - showing up the errors nicely
 - creating a post
 - Delete a post
-
-# todo
-
 - updating a post
 - functionality for like/dislike a post
-- uploade an image in the post
 - profile page
 - edit profile page
+
+# todo
+- uploade an image in the post
 - push notifications
