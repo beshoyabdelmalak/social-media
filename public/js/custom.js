@@ -32,8 +32,8 @@ $('.modal-footer').find('button').click(function (){
         },
         //in case of success
         success: function(response){
-                body.textContent = response['body'];
-                $('#modal').modal('toggle');
+            body.textContent = $('.modal-body').find('#body').val();
+            $('#modal').modal('toggle');
         },
         //in case of failure
         error: function (res) {
@@ -53,7 +53,6 @@ $("#modal").on("hidden.bs.modal", function () {
 
 
 //Deleting Post
-//
 
 $('body').find('.delete').on('click', function (e) {
     e.preventDefault();

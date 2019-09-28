@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File as File;
 class UserController extends Controller{
 
     public function signup(Request $request){
-        $request->validate([
+       $request->validate([
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'username' => 'required|unique:users,username|max:255|min:4',

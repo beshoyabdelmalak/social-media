@@ -11,29 +11,31 @@ use Validator;
 
 
 class PostController extends Controller{
+
+
+    public function index(){
+        $posts = Post::OrderBy('created_at', 'desc')->get();
+        return view('dashboard',compact('posts'));
+    }
+
+
     /**
      * @param Request $request
      */
     public function createPost(Request $request){
 
-        //todo vaidation
-        $request->validate([
+        $attributes = $request->validate([
            "body" => "required| max:1000"
         ]);
-        //save the new post
-        $post = new Post();
-        $post->body = $request['body'];
+
+        $attributes['user_id'] = auth()->id();
 
         $msg = 'Error: Post cannot be created' ;
-        if(Auth::user()->posts()->save($post)) {
+
+        if(Post::create($attributes)) {
             $msg = "Post created successfully";
         }
         return redirect()->route('dashboard')->with(['msg'=> $msg]);
-    }
-
-    public function dashboard(){
-        $posts = Post::OrderBy('created_at', 'desc')->get();
-        return view('dashboard',compact('posts'));
     }
 
     public function deletePost(Request $request){
@@ -59,7 +61,7 @@ class PostController extends Controller{
         if($post && Auth::user() == $post->user) {
             $post->body = $request['body'];
             $post->update();
-            //return redirect()->back()->with('msg', 'post was deleted successfully');
+            return redirect()->back()->with('msg', 'post was updated successfully');
         }
 
         return response()->json(["error"=>"Something went wrong"],422);

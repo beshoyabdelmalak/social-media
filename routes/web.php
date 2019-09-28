@@ -43,7 +43,7 @@ Route::post('/edit',[
 ]);
 Route::view('/update', 'edit_profile')->name('update')->middleware('auth');
 Route::get('/dashboard',[
-    'uses' => 'PostController@dashboard',
+    'uses' => 'PostController@index',
     'as' => 'dashboard',
     'middleware' => 'auth'
 ]);
