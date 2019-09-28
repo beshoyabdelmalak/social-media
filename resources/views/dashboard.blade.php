@@ -21,16 +21,17 @@
                         <div class="col-md-1 p-0">
                             <img class="profile-img-dashboard" src="/uploads/avatars/{{$post->user->image}}" alt="profile-image"/>
                         </div>
-                        <div class="col-md-7 name">
+                        <div class="col-md-1 name">
                             <p class="font-italic m-0 p-t-4"> {{$post->user->first_name}} </p>
+                        </div>
+                        <div class="info col-md-2">
+                            {{\App\Http\Controllers\PostController::time($post->created_at)}}
                         </div>
                     </div>
                     <article>
                         {{$post->body}}
                     </article>
-                    <div class="info">
-                        on {{$post->created_at}}
-                    </div>
+
                     <div class="interaction btn-group btn-group-toggle">
                         <button type="button" class="btn btn-light liked buttons @if(\App\Http\Controllers\PostController::isLiked($post->id, $likes)) is-active-liked @endif" data-post-id="{{$post->id}}"><i class="material-icons icon">thumb_up</i><span class="post-buttons">Like</span></button>
                         <button type="button" class="btn btn-light disliked buttons @if(\App\Http\Controllers\PostController::isdisliked($post->id, $likes)) is-active-disliked @endif" data-post-id="{{$post->id}}"><i class="material-icons icon" style="margin-top:2px;">thumb_down</i><span class="post-buttons">Dislike</span></button>

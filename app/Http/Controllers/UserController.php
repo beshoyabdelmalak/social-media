@@ -70,7 +70,7 @@ class UserController extends Controller{
             'password' => 'confirmed'
         ]);
         foreach($request->all() as $key=>$value){
-            if (!empty($value) && $key != '_token'){
+            if (!empty($value) && $key != '_token' && $key != 'file'){
                 if ($user->$key != $value){
                     $user->$key = $value;
                 }
@@ -87,7 +87,6 @@ class UserController extends Controller{
 
             $user->image = $filename;
         }
-
         $user->save();
 
         return redirect()->route('profile', compact('user', $user));

@@ -14,8 +14,8 @@ $('.post').find('.edit').click(function (event){
     event.preventDefault();
     id = $(this).data('post-id');
     //get the post body from the dashboard
-    body = event.target.parentNode.parentNode.childNodes[3];
-    console.log(body);
+    body = event.target.parentNode.parentNode.parentNode.childNodes[3];
+    console.log(event.target.parentNode.parentNode.parentNode.childNodes[3]);
     modalBody.val(body.textContent.trim());
     $('#modal').modal();
 })
@@ -85,7 +85,6 @@ $('body').find('.delete').on('click', function (e) {
 //liking and disliking functionality
 $('.buttons').click(function(e){
     var isLike = e.target.parentElement.classList.contains('liked') || e.target.classList.contains('liked');
-    console.log(isLike);
     if (isLike){
         $(this).toggleClass('is-active-liked');
         $(e.target.parentElement.nextElementSibling).removeClass('is-active-disliked');

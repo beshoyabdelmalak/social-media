@@ -105,4 +105,27 @@ class PostController extends Controller{
         }
         return false;
     }
+
+    public static function time($created_at){
+        $x =  strtotime(date("Y-m-d H:i:s")) - (strtotime($created_at));
+        if ($x < 60)
+            return round($x) ." " . "sec";
+        $x = $x /60;
+        if ($x < 60)
+            return round($x)." " . "min";
+        $x = $x /60;
+        if ($x < 24)
+            return round($x) ." " . "hr";
+        $x = $x /24;
+        if ($x < 7)
+            return round($x) ." " . "days";
+        $x = $x /7;
+        if ($x < 31)
+            return round($x) ." " . "week";
+        $x = $x /31;
+        if ($x < 12)
+            return round($x)." "  . "month";
+        $x = $x /12;
+        return round($x)  ." " . "year";
+    }
 }
