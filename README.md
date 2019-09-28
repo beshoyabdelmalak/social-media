@@ -1,3 +1,5 @@
+# Screenshots of the app is uploaded to the Screenshots folder
+
 # social-media
 a simple social network were every user can publish posts which are going to be visible for the other users
 
