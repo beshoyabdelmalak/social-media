@@ -11,7 +11,7 @@
 {{--        </form>--}}
         @if(auth()->user())
             <div class="navbar-nav">
-                <img class="profile-img-header" src="/uploads/avatars/{{$post->user->image}}" alt="profile-image"/>
+                <img class="profile-img-header" src="/uploads/avatars/{{auth()->user()->image}}" alt="profile-image"/>
                 <a class="nav-item nav-link" href="{{route('profile')}}">Account</a>
                 <a class="nav-item nav-link" href="{{route('logout')}}">Logout</a>
             </div>

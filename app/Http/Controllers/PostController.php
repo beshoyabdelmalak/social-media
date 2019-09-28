@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\Post;
-use http\Env\Response;
-use http\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 
@@ -15,7 +15,9 @@ class PostController extends Controller{
 
     public function index(){
         $posts = Post::OrderBy('created_at', 'desc')->get();
-        return view('dashboard',compact('posts'));
+        $likes = Like::select('post_id', 'like')->where("user_id", auth()->id())->get();
+//        dd($likes);
+        return view('dashboard',compact('posts', 'likes'));
     }
 
 
@@ -67,5 +69,40 @@ class PostController extends Controller{
         return response()->json(["error"=>"Something went wrong"],422);
 
 
+    }
+
+    public function likePost(Request $request){
+        $isLike = $request['isLike'] == 'true';
+        $post = Post::find($request['post_id']);
+        if (!$post){
+            return response()->json(["error"=>"Something went wrong"],422);
+        }
+        $like = Like::where('post_id', $request['post_id'])->where('user_id', auth()->id())->first();
+        if ($like){
+            if($like->like == $isLike){
+                $like->delete();
+            }
+            $like->update(['like' => $isLike]);
+        }else{
+            $like = new Like();
+            $like->user_id = auth()->id();
+            $like->post_id = $request['post_id'];
+            $like->like = $isLike;
+            $like->save();
+        }
+    }
+    public static function isLiked($post_id, $likes){
+        foreach ($likes as $like){
+            if ($like->post_id == $post_id && $like->like)
+                return true;
+        }
+        return false;
+    }
+    public static function isDisliked($post_id, $likes){
+        foreach ($likes as $like){
+            if ($like->post_id == $post_id && !$like->like)
+                return true;
+        }
+        return false;
     }
 }

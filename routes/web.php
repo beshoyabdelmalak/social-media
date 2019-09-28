@@ -62,3 +62,8 @@ Route::post('/editPost',[
     'as' => 'editPost',
     'middleware' => 'auth'
 ]);
+Route::post('/likePost',[
+    'uses' => 'PostController@likePost',
+    'as' => 'likePost',
+    'middleware' => 'auth'
+]);

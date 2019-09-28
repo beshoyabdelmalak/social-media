@@ -126,23 +126,22 @@
 .post-buttons{
     float:right;
     margin-left:3px;
+    font-size: 13px;
 }
 .icon{
     font-size: 17px !important;
 }
-.liked{
-    font-size: 13px;
-    transition: color 0.3s ease;
-    -webkit-transition: color 0.3s; /* Safari 3.1 to 6.0 */
-}
-.liked:focus {
+
+.is-active-liked {
     color: #3b57e6;
 }
-.disliked{
-    font-size: 13px;
-    transition: color 0.3s ease;
-    -webkit-transition: color 0.3s; /* Safari 3.1 to 6.0 */
-}
-.disliked:focus {
+
+.is-active-disliked {
     color: #e82727;
+}
+
+@media screen and (min-width: 980px) {
+    .name {
+        padding: 0px;
+    }
 }

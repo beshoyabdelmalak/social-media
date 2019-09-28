@@ -15,6 +15,7 @@ $('.post').find('.edit').click(function (event){
     id = $(this).data('post-id');
     //get the post body from the dashboard
     body = event.target.parentNode.parentNode.childNodes[3];
+    console.log(body);
     modalBody.val(body.textContent.trim());
     $('#modal').modal();
 })
@@ -56,7 +57,6 @@ $("#modal").on("hidden.bs.modal", function () {
 
 $('body').find('.delete').on('click', function (e) {
     e.preventDefault();
-    //alert('am i here');
     if (confirm('Are you sure you want to Delete Post ?')) {
         id = $(this).data('post-id');
         $.ajax({
@@ -67,7 +67,7 @@ $('body').find('.delete').on('click', function (e) {
                 "id" : id
             },
             success: function(response){
-                alert(response['msg']);
+                // alert(response['msg']);
                 location.reload();
             },
             error: function (response) {
@@ -81,3 +81,32 @@ $('body').find('.delete').on('click', function (e) {
         return false;
     }
 });
+
+//liking and disliking functionality
+$('.buttons').click(function(e){
+    var isLike = e.target.parentElement.classList.contains('liked') || e.target.classList.contains('liked');
+    console.log(isLike);
+    if (isLike){
+        $(this).toggleClass('is-active-liked');
+        $(e.target.parentElement.nextElementSibling).removeClass('is-active-disliked');
+    }else{
+        $(this).toggleClass('is-active-disliked');
+        $(e.target.parentElement.previousElementSibling).removeClass('is-active-liked');
+    }
+    id = $(this).data('post-id');
+    e.preventDefault();
+    $.ajax({
+        method : 'POST',
+        url : '/likePost',
+        data: {
+            "_token": token,
+            "post_id" : id,
+            "isLike" : isLike
+        }
+    })
+        .done(function(){
+
+        });
+});
+
+
