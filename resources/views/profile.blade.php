@@ -63,51 +63,7 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         @if(count($user->posts) > 0)
-                            @foreach($user->posts as $post )
-                                <div class="content post">
-                                    <div class = "row">
-                                        <div class="col-2 p-r-0">
-                                            <img src="/uploads/avatars/{{Auth::user()->image}}" alt="profile-image" class = 'w-85 rounded-circle'/>
-                                        </div>
-                                        <div class="col-3 p-l-10">
-                                            <p class="font-italic m-t-5"> {{$post->user->username}} </p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <article>{{$post->body}}</article>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="info">on {{$post->created_at}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-2 p-r-0">
-                                            <a href="#">Like</a>
-                                        </div>
-                                        |
-                                        <div class="col-2 p-r-0">
-                                            <a href="#">Dislike</a>
-                                        </div>
-{{--                                        {{$post->user}}--}}
-{{--                                        {{dd(Auth::user())}}--}}
-                                            @if (Auth::user() == $post->user)
-                                                |
-                                                <div class="col-2 p-r-0">
-                                                    <a href="#" class ="edit" data-post-id="{{$post->id}}">Edit</a>
-                                                </div>
-                                                |
-                                                <div class="col-2 p-r-0">
-                                                    <a href="#" class ="delete" data-post-id="{{$post->id}}">Delete</a>
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <hr>
-                                    </div>
-                                </div>
-                            @endforeach
+                            @include("includes.posts")
                         @else
                             <div class = "post">
                                 <p class="font-italic"> No Posts yet </p>
@@ -115,9 +71,10 @@
                         @endif
                     </div>
                 </div>
+            </div>
+        </div>
             <div class="col-md-3">
                 <a class="profile-edit-btn btn" href="{{route('update')}}">Edit Profile</a>
             </div>
         </div>
-    </div>
     @endsection

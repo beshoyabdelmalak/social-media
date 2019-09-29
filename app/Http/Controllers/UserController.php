@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Like;
 use App\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -56,7 +57,9 @@ class UserController extends Controller{
 
     public function getAccount(){
         $user = Auth::user();
-        return view('profile', compact("user"));
+        $posts = $user->posts;
+        $likes = Like::select('post_id', 'like')->where("user_id", auth()->id())->get();
+        return view('profile', compact("user", "posts","likes"));
     }
 
     public function update(Request $request){
@@ -88,8 +91,7 @@ class UserController extends Controller{
             $user->image = $filename;
         }
         $user->save();
-
-        return redirect()->route('profile', compact('user', $user));
+        return redirect()->route('profile', compact('user'));
     }
 
 }

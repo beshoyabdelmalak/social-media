@@ -16,7 +16,6 @@ class PostController extends Controller{
     public function index(){
         $posts = Post::OrderBy('created_at', 'desc')->get();
         $likes = Like::select('post_id', 'like')->where("user_id", auth()->id())->get();
-//        dd($likes);
         return view('dashboard',compact('posts', 'likes'));
     }
 
